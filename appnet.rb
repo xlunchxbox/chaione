@@ -2,34 +2,20 @@ require 'open-uri'
 require 'rubygems'
 require 'hpricot'
 
-def save_xml
-  open('appnet.txt', 'wb') do |file|
-    file << open('https://alpha.app.net/browse/conversations/').read
-  end
-end
-
-
+#grab feed at link and store it in doc
 doc = open("https://alpha.app.net/browse/conversations/") { |f| Hpricot(f) }
 
-
+#to hold user_name and password for regex processing
 user_name = ""
 post = ""
-# (doc/"[@class='stream-container']").each do |i|
-#   puts "=================================================================="
-#   user_name = "Username \n #{doc.at("//[@class='post-header']//[@class='username']//a")}" 
-#   user_name =  user_name.scan(/\>(.*?)\</)
-#   puts user_name
-#   
-#   post =  "Post Content \n #{ doc.at("//[@class='post-content']//span")}"
-#   post = post.scan(/\>(.*?)\</)
-#   puts post
-#   puts "=================================================================="
-# end
 
+#search document and store usernames and posts
 user_names = doc.search("//[@class='post-header']//[@class='username']//a")
 posts = doc.search("//[@class='post-content']//span")
 
-test = ""
+
+#loop through user_names and posts array to format the usernames and posts
+#use regex to only grab text contained within > <
 for i in 0..user_names.size - 1
   puts "=================================================================="
   user_name = user_names[i].to_html
@@ -40,6 +26,4 @@ for i in 0..user_names.size - 1
   post = post.scan(/\>(.*?)\</)
   puts post
   puts "=================================================================="
-  test = gets
-  test = test.chomp
 end
