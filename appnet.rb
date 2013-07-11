@@ -14,7 +14,7 @@ user_names = doc.search("//[@class='post-header']//[@class='username']//a")
 posts = doc.search("//[@class='post-content']//span")
 
 
-#loop through user_names and posts array to format the usernames and posts
+#loop through user_names and posts arrays to format the usernames and posts
 #use regex to only grab text contained within > <
 for i in 0..user_names.size - 1
   puts "=================================================================="
