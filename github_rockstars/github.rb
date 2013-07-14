@@ -27,14 +27,9 @@ def parse_info(start, finish)
   
 end
 
-current_date = Time.now.month
-puts current_date
+current_month = Time.now.month
 
-# for i in 1..current_date - 1
-#   puts "#{i}, #{i+1}"
-# end
-
-for i in 1..6
+for i in 1..current_month - 1
   get_git_info(i, i+1)
   parse_info(i, i+1)
 end
