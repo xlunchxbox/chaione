@@ -3,7 +3,7 @@ require 'net/http'
 require 'date'
 
 def get_git_info (start, finish)
-  github_info =  `curl -i' 'http://api.github.com/repos/rails/rails/commits?since=#{Time.now.year}-#{start}-01&until=#{Time.now.year}-#{finish}-01'`
+  github_info =  `curl -i 'http://api.github.com/repos/rails/rails/commits?since=#{Time.now.year}-#{start}-01&until=#{Time.now.year}-#{finish}-01'`
   File.open("github.txt", "w"){|file| file.write(github_info)}
 end
 
